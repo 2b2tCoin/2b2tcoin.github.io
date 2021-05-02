@@ -6,7 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>2b2t Coin</title>
 </head>
-<body>
+<body style="opacity: 0; transition: opacity 0.6s;">
 	<h2> Purchase 2b2t coin </h2>
 	<select>
 		<option value="kovan"> Kovan Testnet </option>
@@ -26,6 +26,7 @@
 <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
 <script type="module">
 	const ethereum = await detectEthereumProvider();
+	document.body.style.opacity = "1";
 
 	if (!ethereum) {
 		alert("You must install MetaMask extension, and then refresh this page!");
@@ -75,18 +76,27 @@
 	async function foo() {
 		document.body.innerHTML = "Processing transaction... Refreshing the page may interfere with this process. Please check your wallet for possible confirmation details.";
 
+		let [[account], error1] = await recover(ethereum.request({
+			method: "eth_requestAccounts",
+		}));
+
+		if (error1) {
+			document.body.innerHTML = "You must provide an address to mint your new tokens into. Please refresh the page to try again!";
+			return;
+		}
+
 		let [result, error] = await recover(ethereum.request({
 			method: 'eth_sendTransaction',
-			params: {
-				to: networks.kovan.contract,
-				gas: "100000",
-				value: etherCost,
+			params: [{
+				from: account,
+				to: network.contract,
+				value: (etherCost * 10 ** 18).toString(16),
 				data: web3.eth.abi.encodeFunctionCall({
 					name: 'mint',
 					type: 'function',
 					inputs: []
 				}, []),
-			},
+			}],
 		}));
 		
 		if (error) {
