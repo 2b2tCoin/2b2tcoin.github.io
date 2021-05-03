@@ -6,110 +6,82 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>2b2t Coin</title>
 </head>
-<body style="opacity: 0; transition: opacity 0.6s;">
-	<h2> Purchase 2b2t coin </h2>
-	<select>
-		<option value="kovan"> Kovan Testnet </option>
-		<option> Ethereum Mainnet (Currently unavailable) </option>
-	</select>
-	<br><br><br>
-	<b>Approximately how much 2BC would you like to purchase?</b><br>
-	<input type="number" value="1000" id="fibble"><br><br>
-	<b>This will cost:</b><br>
-	<h3 id="ethprice" style="color: blue;"></h3>
-	<b><a id="link" target="_blank">View the dollar cost of this purchase here.</a></b><br>However, this price will not actually be applied, since ether is effectively free on the Kovan testnet.<br><br>
-	Click confirm to finalize this purchase. Gas fees will apply.<br>
-	Your wallet may ask you for additional confirmation.<br>
-	<button style="padding: 1rem 2rem;" id="shmoo">Confirm</button>
+<body>
+	<div class="header">
+		<h1> 2b2t Coin </h1>
+	</div>
+
+	<h2> The native currency for 2b2t players </h2>
+
+	<h2 class="clupt"> Bringing value to the oldest anarchy server of Minecraft </h2>
+
+	<p class="cta"> Buy, transfer and manage coins </p>
+	<a href="/wallet.html" style="text-decoration: none;"><p class="cta-button">Go to My 2BC Wallet -></p></a>
+
+	<hr>
+
+	<h3> What can you do with the 2BC cryptocurrency? </h3>
+
+	<ul>
+		<li> Make decentralized payments to other 2b2t players </li>
+		<li> Invest by buying coins and speculating on future demand </li>
+		<li> Coming Soon: Innovations to bring real utility to the 2b2t server. Feel free to leave suggestions by opening an issue on our suggestions page. </li>
+	</ul>
+
 </body>
-<script src="https://unpkg.com/@metamask/detect-provider/dist/detect-provider.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
-<script type="module">
-	const ethereum = await detectEthereumProvider();
-	document.body.style.opacity = "1";
-
-	if (!ethereum) {
-		alert("You must install MetaMask extension, and then refresh this page!");
-		document.body.innerHTML = "Please refresh the page after installing the MetaMask extension!";
-	}
-	
-	ethereum.on('chainChanged', (_chainId) => window.location.reload());
-
-	const web3 = new Web3("https://cloudflare-eth.com");
-
-	let networks = {
-		kovan: {
-			contract: "0x938736ab99c0a46bbf8fe7fb06e6f0974902d581",
-			chainId: 0x2a,
-		},
-	};
-
-	console.log(ethereum);
-
-	let network = networks.kovan;
-	let etherCost = 0;
-	
-	let [result, err] = await recover(ethereum.request({ method: 'eth_chainId' }));
-
-	if (result != network.chainId) {
-		document.body.innerHTML = "Please set your wallet to use the Kovan testnet (chain ID 0x2a). This page will automatically refresh after you have done this!";
-		throw "";
-	}
-
-	function eggplant() {
-		etherCost = (document.getElementById("fibble").value / 1000 / 2500) || 0;
-		document.getElementById("ethprice").innerText = etherCost + " ETH";
-		document.getElementById("link").href = `https://www.google.com/search?q=${etherCost.toFixed(9)}+eth+to+usd`;
-	}
-
-	eggplant();
-	document.getElementById("fibble").onchange = eggplant;
-
-	async function recover(promise) {
-		try {
-			return [await promise, null];
-		} catch (e) {
-			return [null, e];
-		}
-	}
-
-	async function foo() {
-		document.body.innerHTML = "Processing transaction... Refreshing the page may interfere with this process. Please check your wallet for possible confirmation details.";
-
-		let [[account], error1] = await recover(ethereum.request({
-			method: "eth_requestAccounts",
-		}));
-
-		if (error1) {
-			document.body.innerHTML = "You must provide an address to mint your new tokens into. Please refresh the page to try again!";
-			return;
-		}
-
-		let [result, error] = await recover(ethereum.request({
-			method: 'eth_sendTransaction',
-			params: [{
-				from: account,
-				to: network.contract,
-				value: (etherCost * 10 ** 18).toString(16),
-				data: web3.eth.abi.encodeFunctionCall({
-					name: 'mint',
-					type: 'function',
-					inputs: []
-				}, []),
-			}],
-		}));
-		
-		if (error) {
-			console.log(error);
-			document.body.innerHTML = "Your wallet has informed us that the transaction has failed, but you should check with your wallet to be sure. Please refresh this page at any point to try again!";
-			return;
-		}
-		
-		console.log(result);
-		document.body.innerHTML = "It appears the transaction has succeeded! Refresh the page if you'd like to go back to the website.";
-	}
-	
-	document.getElementById("shmoo").onclick = foo;
-
-</script>
 </html>
+
+<style>
+
+	/* @import url('https://fonts.googleapis.com/css2?family=Krona+One&display=swap'); */
+	@import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;400&display=swap');
+	
+	* {
+		padding: 0;
+		margin: 0;
+	}
+
+	body {
+		background: #111;
+		color: white;
+		/* font-family: 'Krona One', sans-serif; */
+		font-family: 'Titillium Web', sans-serif;
+	}
+
+	.header {
+		background: black;
+		padding: 0.5rem;
+		color: gold;
+	}
+
+	h1 {
+		font-weight: 400;
+		text-align: center;
+	}
+
+	h2 {
+		font-weight: 400;
+		text-align: center;
+		padding: 0.5rem;
+		border-bottom: 0.25rem solid #222;
+	}
+
+	h2.clupt {
+		border-bottom: none;
+		font-size: 1.25rem;
+		color: #ccc;
+	}
+
+	.cta {
+		font-size: 1.5rem;
+	}
+
+	.cta-button {
+		display: inline-block;
+		padding: 1rem 2rem;
+		background: rgb(0, 71, 204);
+		color: white;
+		font-size: 1.5rem;
+	}
+
+</style>
