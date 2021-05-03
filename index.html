@@ -15,17 +15,17 @@
 
 	<h2 class="clupt"> Bringing value to the oldest anarchy server of Minecraft </h2>
 
-	<p class="cta"> Buy, transfer and manage coins </p>
-	<a href="/wallet.html" style="text-decoration: none;"><p class="cta-button">Go to My 2BC Wallet -></p></a>
-
-	<hr>
+	<div class="call-to-action">
+		<p class="cta"> Buy, transfer and manage coins </p>
+		<a href="/wallet.html" style="text-decoration: none;"><p class="cta-button">Go to My 2BC Wallet<span style="padding-left: 1rem"></span>➜</p></a>
+	</div>
 
 	<h3> What can you do with the 2BC cryptocurrency? </h3>
 
 	<ul>
 		<li> Make decentralized payments to other 2b2t players </li>
 		<li> Invest by buying coins and speculating on future demand </li>
-		<li> Coming Soon: Innovations to bring real utility to the 2b2t server. Feel free to leave suggestions by opening an issue on our suggestions page. </li>
+		<li> Coming Soon: Innovations to bring real utility to the 2b2t server. Feel free to leave suggestions by <a href="https://github.com/2b2tCoin/suggestions/issues/new">opening an issue</a> on our <a href="https://github.com/2b2tCoin/suggestions/issues">suggestions page</a>. </li>
 	</ul>
 
 </body>
@@ -70,18 +70,36 @@
 		border-bottom: none;
 		font-size: 1.25rem;
 		color: #ccc;
+		/* margin-top: 1.5rem; */
+	}
+
+	.call-to-action {
+		text-align: center;
+		margin-top: 2rem;
+		margin-bottom: 2rem;
+		border-bottom: 0.25rem solid #222;
 	}
 
 	.cta {
 		font-size: 1.5rem;
+		margin-bottom: 1rem;
 	}
 
 	.cta-button {
 		display: inline-block;
 		padding: 1rem 2rem;
 		background: rgb(0, 71, 204);
+		/* border: 4px solid rgb(0, 65, 185); */
+		/* border: 4px solid rgb(0, 43, 124); */
+		border-radius: 0.5rem;
 		color: white;
 		font-size: 1.5rem;
+		margin-bottom: 3rem;
+	}
+
+	h3, ul {
+		text-align: center;
+		background: rgb(10, 10, 10);
 	}
 
 </style>
