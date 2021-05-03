@@ -30,8 +30,8 @@
 	document.body.style.opacity = "1";
 
 	if (!ethereum) {
-		alert("You must install MetaMask extension, and then refresh this page!");
-		document.body.innerHTML = "Please refresh the page after installing the MetaMask extension!";
+		alert("To use this website, you must use the MetaMask browser on mobile, or install the MetaMask extension on desktop.");
+		document.body.innerHTML = "Please refresh the page after installing the MetaMask extension! Extensions are not supported on mobile, in which case you should install the MetaMask browser from the Google Play or Apple App Store.";
 	}
 	
 	ethereum.on('chainChanged', (_chainId) => window.location.reload());
